@@ -11,9 +11,10 @@ class InsertionSort extends Component {
 
         this.state = {
             arrayValues: [],
-            arrayLength: 10,
-            delayValue: 350,
-            barColor: '#2999ff'
+            arrayLength: 20,
+            delayValue: 50,
+            barColor: '#2999ff',
+            compareColor: '#F69884'
         }
     }
 
@@ -23,34 +24,49 @@ class InsertionSort extends Component {
 
     generateRandomArray = () => {
         const result = getRandomValues(this.state.arrayLength, this.state.barColor)
-        this.setState({arrayValues: result})
+        this.setState({ arrayValues: result })
     }
 
     insertionSort = async () => {
-        const array = this.state.arrayValues;
-        console.log(array);
+        var newArray = this.state.arrayValues;
 
-        // change colors
-        var newArray = changeColors(array, [0, 1], '#F69884');
-        this.setState({arrayValues: newArray});
-        await delay(this.state.delayValue)
+        for (let i = 1; i < newArray.length; i++) {
+            let currentVal = newArray[i].value;
+            let currentValIndex = i;
+            let j = i - 1;
 
-        // swap
-        newArray = swap(newArray, [0, 1])
-        this.setState({arrayValues: newArray});
-        await delay(this.state.delayValue)
+            while (j >= 0) {
+                // compare and swap if necessary
+                newArray = changeColors(newArray, [j, currentValIndex], this.state.compareColor);
+                await this.setState({ arrayValues: newArray });
+                await delay(this.state.delayValue)
 
-        newArray = changeColors(array, [0, 1], this.state.barColor);
-        this.setState({arrayValues: newArray});
+                if (newArray[j].value > currentVal) {
+                    newArray = swap(newArray, [j, currentValIndex]);
+                    this.setState({ arrayValues: newArray });
+                    await delay(this.state.delayValue);
+
+                    newArray = await changeColors(newArray, [j, currentValIndex], this.state.barColor);
+                    await this.setState({ arrayValues: newArray });
+                    
+                    currentValIndex = j
+                    j = j - 1;
+                } else {
+                    newArray = changeColors(newArray, [j, currentValIndex], this.state.barColor);
+                    await this.setState({ arrayValues: newArray });
+                    break;
+                }
+            }
+        }
     }
 
     render() {
         return (
             <div className="insertion-sort-container">
                 <h1 className="title"> Insertion Sort </h1>
-                <SortContainer arrayValues={this.state.arrayValues}/>
-                <button onClick={this.generateRandomArray}> Generate Random </button>
-                <button onClick={this.insertionSort}> Swap </button>
+                <SortContainer arrayValues={this.state.arrayValues} />
+                <button onClick={this.generateRandomArray} style={{margin: '20px'}}> Reset </button>
+                <button onClick={this.insertionSort} style={{margin: '20px'}}> Sort </button>
             </div>
         )
     }

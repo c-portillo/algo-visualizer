@@ -1,7 +1,7 @@
 
 // generate a random array of elements representing a bars (each with values for height, color, and id)
 export const getRandomValues = (size, color) => {
-    const values = Array.from({ length: size }, () => Math.floor(Math.random() * 100));
+    const values = Array.from({ length: size }, () => Math.floor(Math.random() * 99 + 1));
     const result = []
     for (var i = 0; i < values.length; i++) {
         result.push({
