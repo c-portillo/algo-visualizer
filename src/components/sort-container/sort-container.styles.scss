@@ -1,8 +1,15 @@
 .sort-container {
-    width: 75vw;
+    width: 75%;
     height: 40vh;
     margin: 25px auto;
     display: flex;
     border-style: solid;
     justify-content: flex-end;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .sort-container {
+      width: 95%;
+    }
 }

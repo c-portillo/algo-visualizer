@@ -1,4 +1,4 @@
-import { SortContainer } from './components/sort-container/sort-container';
+import React from 'react';
 import InsertionSort from './pages/insertion-sort/insertion-sort.component';
 
 import './App.css';
