@@ -11,8 +11,8 @@ class InsertionSort extends Component {
 
         this.state = {
             arrayValues: [],
-            arrayLength: 25,
-            delayValue: 40,
+            arrayLength: 12,
+            delayValue: 200,
             defaultBarColor: '#1962E5',
             currBarColor: '#B8D0FC',
             compareBorderColor: '#EB3939',
