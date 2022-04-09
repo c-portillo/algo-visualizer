@@ -10,3 +10,18 @@
 .dropdown-toggle {
     font-size: 1.4rem;
 }
+
+@media only screen and (max-width: 800px) {
+    .dropdown-toggle {
+        font-size: 1rem;
+    }
+
+    .nav-item {
+        zoom: 0.75;
+    }
+
+    .navbar {
+        margin-bottom: 5vh;
+        padding: 10px 0;
+    }
+}
