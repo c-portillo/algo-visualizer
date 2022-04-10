@@ -1,0 +1,11 @@
+.menu-algo {
+    text-decoration: none !important;
+    color: rgb(24, 6, 91);
+    // font-size: small;
+}
+
+@media only screen and (max-width: 500px) {
+    .menu-algo {
+        font-size: smaller;
+    }
+}

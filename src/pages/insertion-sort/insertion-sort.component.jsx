@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import SortContainer from "../../components/sort-container/sort-container";
 
 import { getRandomValues, delay, setColors, swap, setBorderColor } from "../../utils/shared";
@@ -21,6 +21,7 @@ class InsertionSort extends Component {
     }
 
     componentDidMount() {
+        this.props.setPage("insertion-sort")
         this.generateRandomArray();
     }
 
