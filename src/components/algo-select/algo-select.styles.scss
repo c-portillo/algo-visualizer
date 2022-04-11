@@ -1,6 +1,7 @@
 .menu-algo {
     text-decoration: none !important;
     width: 100% !important;
+    height: 100%!important;
     color: rgb(24, 6, 91);
     padding: 5px, 16px !important;
     // font-size: small;
@@ -9,8 +10,9 @@
     padding: 0 !important;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .menu-algo {
         font-size: smaller;
+        padding: 1em;
     }
 }
