@@ -35,10 +35,10 @@ function AlgoSelect({ currentPage }) {
             >
                 {/* <MenuItem className="menu-item" value=""> <em> Random </em> </MenuItem> */}
 
-                <MenuItem value={'merge-sort'}> <Link className="menu-algo" to="/merge-sort"> Merge Sort </Link> </MenuItem>
-                <MenuItem value={'bubble-sort'}> <Link className="menu-algo" to="/bubble-sort"> Bubble Sort </Link> </MenuItem>
-                <MenuItem value={'insertion-sort'}> <Link className="menu-algo" to="/insertion-sort"> Insertion Sort </Link> </MenuItem>
-                <MenuItem value={'selection-sort'}> <Link className="menu-algo" to="/selection-sort"> Selection Sort </Link> </MenuItem>
+                <MenuItem className="menu-item" value={'merge-sort'}> <Link className="menu-algo" to="/merge-sort"> Merge Sort </Link> </MenuItem>
+                <MenuItem className="menu-item" value={'bubble-sort'}> <Link className="menu-algo" to="/bubble-sort"> Bubble Sort </Link> </MenuItem>
+                <MenuItem className="menu-item" value={'insertion-sort'}> <Link className="menu-algo" to="/insertion-sort"> Insertion Sort </Link> </MenuItem>
+                <MenuItem className="menu-item" value={'selection-sort'}> <Link className="menu-algo" to="/selection-sort"> Selection Sort </Link> </MenuItem>
             </Select>
         </FormControl>
     );
