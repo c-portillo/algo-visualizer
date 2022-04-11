@@ -17,7 +17,7 @@ function App() {
       <div>
         <NavBar currentPage={page} />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" > <Home setPage={setPage} /> </Route>
           <Route path="/merge-sort"> <MergeSort setPage={setPage} /> </Route>
           <Route path="/bubble-sort"> <BubbleSort setPage={setPage} /> </Route>
           <Route path="/insertion-sort"> <InsertionSort setPage={setPage} /> </Route>

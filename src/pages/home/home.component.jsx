@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import './home.styles.scss'
 
-const Home = () => {
+const Home = ({setPage}) => {
+    useEffect(() => {
+        setPage('');
+    }, []);
+
     return (
         <div style={{ textAlign: 'center' }}>
             <h1> Hello, World!</h1>

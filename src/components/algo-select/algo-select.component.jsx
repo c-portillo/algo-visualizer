@@ -10,9 +10,6 @@ import "./algo-select.styles.scss"
 function AlgoSelect({ currentPage }) {
     let [algo, setAlgo] = useState(currentPage);
 
-    // console.log('algo: ', algo ? algo : "nothing");
-    // console.log('current page: ', currentPage ? currentPage : "nothing");
-
     useEffect(() => {
         setAlgo(currentPage);
     }, [currentPage])
