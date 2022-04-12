@@ -12,8 +12,13 @@ import './App.css';
 function App() {
   const [page, setPage] = useState("");
 
+  useEffect(() => {
+    console.log(page);
+  }, [page]);
+
   return (
-    <HashRouter basename="/sorting-visualizer/">
+    // <HashRouter basename="/sorting-visualizer/">
+    <HashRouter>
       <div>
         <NavBar currentPage={page} />
         <Switch>

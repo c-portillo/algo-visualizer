@@ -10,9 +10,10 @@ import "./algo-select.styles.scss"
 function AlgoSelect({ currentPage }) {
     let [algo, setAlgo] = useState(currentPage);
 
-    useEffect(() => {
+    // when currentPage updates, set selected algo to current page
+    useEffect(()=> {
         setAlgo(currentPage);
-    }, [currentPage])
+    } ,[currentPage]);
 
     const handleChange = (event) => {
         setAlgo(event.target.value);

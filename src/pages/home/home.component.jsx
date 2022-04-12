@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 
 import './home.styles.scss'
 
-const Home = ({setPage}) => {
+const Home = ({ setPage }) => {
     useEffect(() => {
-        setPage('');
+        setPage("");
     }, []);
 
     return (
