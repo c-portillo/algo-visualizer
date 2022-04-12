@@ -21,7 +21,6 @@ export const setBorderColor = (array, indices, color) => {
     for (const idx of indices) {
         array[idx].borderColor = color;
     }
-
     return array;
 }
 
@@ -34,7 +33,6 @@ export const setColors = (array, indices, color, border=true) => {
         array[idx].color = color;
         if (border) array[idx].borderColor = color;
     }
-    
     return array;
 }
 
@@ -44,7 +42,6 @@ export const swap = (array, indices) => {
         const temp = array[indices[0]];
         array[indices[0]] = array[indices[1]];
         array[indices[1]] = temp;
-
         return array
     } else {
         throw new Error('in swap(array, indices), indices must be array of length 2');

@@ -10,7 +10,14 @@ const SortContainer = ({ arrayValues, arrayLength }) => {
         <div className="sort-container">
             {
                 arrayValues.map((item, index) => (
-                    <Bar key={index} value={item.value} color={item.color} current={item.current} borderColor={item.borderColor} barWidth={barWidth} />
+                    <Bar
+                        key={index}
+                        value={item.value}
+                        color={item.color}
+                        current={item.current}
+                        borderColor={item.borderColor}
+                        barWidth={barWidth}
+                    />
                 ))
             }
         </div>

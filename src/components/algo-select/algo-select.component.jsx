@@ -23,7 +23,6 @@ function AlgoSelect({ currentPage }) {
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
             <InputLabel id="demo-select-small">Algo</InputLabel>
             <Select
-            
                 displayEmpty={false}
                 labelId="demo-select-small"
                 id="demo-select-small"
@@ -32,7 +31,6 @@ function AlgoSelect({ currentPage }) {
                 onChange={handleChange}
             >
                 {/* <MenuItem className="menu-item" value=""> <em> Random </em> </MenuItem> */}
-
                 <MenuItem className="menu-item" value={'merge-sort'}> <Link className="menu-algo" to="/merge-sort"> Merge Sort </Link> </MenuItem>
                 <MenuItem className="menu-item" value={'bubble-sort'}> <Link className="menu-algo" to="/bubble-sort"> Bubble Sort </Link> </MenuItem>
                 <MenuItem className="menu-item" value={'insertion-sort'}> <Link className="menu-algo" to="/insertion-sort"> Insertion Sort </Link> </MenuItem>

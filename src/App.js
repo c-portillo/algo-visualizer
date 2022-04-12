@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { HashRouter, Route, Link, Switch } from "react-router-dom";
+
 import Home from './pages/home/home.component';
 import NavBar from './components/navbar/navbar.component';
 import MergeSort from './pages/merge-sort/merge-sort.component';
 import BubbleSort from './pages/bubble-sort/bubble-sort.component';
 import SelectionSort from './pages/selection-sort/selection-sort.component';
 import InsertionSort from './pages/insertion-sort/insertion-sort.component';
-import { HashRouter, Route, Link, Switch } from "react-router-dom";
 
 import './App.css';
 
 function App() {
   const [page, setPage] = useState("");
 
-  useEffect(() => {
-    console.log(page);
-  }, [page]);
-
   return (
-    // <HashRouter basename="/sorting-visualizer/">
     <HashRouter>
       <div>
         <NavBar currentPage={page} />
