@@ -28,7 +28,15 @@ export const delay = (time) => {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-export const setColors = (array, indices, color, border=true) => {
+export const until = (conditionFunction) => {
+    const poll = resolve => {
+        if (conditionFunction()) resolve();
+        else setTimeout(_ => poll(resolve), 400);
+    }
+    return new Promise(poll);
+}
+
+export const setColors = (array, indices, color, border = true) => {
     for (const idx of indices) {
         array[idx].color = color;
         if (border) array[idx].borderColor = color;
