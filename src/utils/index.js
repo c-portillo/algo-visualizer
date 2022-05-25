@@ -36,7 +36,7 @@ export const until = (conditionFunction) => {
     return new Promise(poll);
 }
 
-export const setColors = (array, indices, color, border = true) => {
+export const setColors = (array, indices, color, border=true) => {
     for (const idx of indices) {
         array[idx].color = color;
         if (border) array[idx].borderColor = color;
@@ -55,3 +55,6 @@ export const swap = (array, indices) => {
         throw new Error('in swap(array, indices), indices must be array of length 2');
     };
 }
+
+// export sorting logic
+export { insertionSortSolver } from './sort-algos/insertion-sort-solver';
