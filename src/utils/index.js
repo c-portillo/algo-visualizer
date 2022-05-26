@@ -1,4 +1,3 @@
-
 // generate a random array of elements representing a bars (each with values for height, color, and id)
 export const getRandomValues = (size, color) => {
     const values = Array.from({ length: size }, () => Math.floor(Math.random() * 97 + 1));
@@ -52,9 +51,9 @@ export const swap = (array, indices) => {
         array[indices[1]] = temp;
         return array
     } else {
-        throw new Error('in swap(array, indices), indices must be array of length 2');
+        throw new Error('in swap(array, indices), indices must be array of 2 integers');
     };
 }
 
-// export sorting logic
+// sorting logic
 export { insertionSortSolver } from './sort-algos/insertion-sort-solver';

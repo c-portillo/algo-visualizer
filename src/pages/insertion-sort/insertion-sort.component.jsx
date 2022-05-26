@@ -1,26 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { insertionSortSolver } from "../../utils";
 import AlgoPage from "../../components/algo-page/algo-page.component";
 
-function InsertionSort() {
+function InsertionSort( {setPage} ) {
+    useEffect(() => {
+        setPage("insertion-sort");
+    }, [])
+    
     return (
         <AlgoPage algoName="Insertion Sort" solver={insertionSortSolver} />
     )
 }
 
 export default InsertionSort;
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*

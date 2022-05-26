@@ -2,12 +2,16 @@ import React from "react";
 import { getRandomValues, delay } from "../../utils";
 import SortContainer from "../sort-container/sort-container";
 
+import './algo-page.styles.scss'
+
 /*
 1. Generate array           x
 2. Render array             x 
 3. Design sorting func      x
 4. swap first and last      x
-5. implement ins sort       
+5. change solve to sort     x
+6. change solver to sorter  x
+7. implement ins sort             
 */
 
 class AlgoPage extends React.Component {
@@ -18,13 +22,14 @@ class AlgoPage extends React.Component {
             arrayValues: [],
             arrayLength: 12,
             defaultBarColor: '#1962E5',
-            delayValue: 500
+            delayValue: 450
         }
 
         this.generateArray = this.generateArray.bind(this);
         this.updateArray = this.updateArray.bind(this);
-        this.solve = this.solve.bind(this);
+        this.sort = this.sort.bind(this);
     }
+
     async updateArray(newArray) {
         await this.setState(newArray);
         await delay(this.state.delayValue);
@@ -39,10 +44,9 @@ class AlgoPage extends React.Component {
         this.setState({ arrayValues: newArray });
     }
 
-    solve() {
-        this.props.solver({ array: this.state.arrayValues, updateArray: this.updateArray }) // solver will take 3 arguments: array, updateArray(), done()
+    sort() {
+        this.props.solver({ array: this.state.arrayValues, updateArray: this.updateArray }); // solver will take 3 arguments: array, updateArray(), done()
     }
-
 
     render() {
         return (
@@ -50,7 +54,8 @@ class AlgoPage extends React.Component {
                 <div style={{ textAlign: 'center' }}>
                     <h2> {this.props.algoName} </h2>
                     <SortContainer arrayValues={this.state.arrayValues} arrayLength={this.state.arrayLength} />
-                    <button onClick={this.solve}> Sort </button>
+                    <button onClick={this.sort}> Sort </button>
+                    <button onClick={this.generateArray}> Reset </button>
                 </div>
             </div>
         )

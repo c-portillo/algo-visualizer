@@ -1,27 +1,65 @@
-import { delay, until, setColors, swap, setBorderColor } from ".."
+import { until, setColors, swap, setBorderColor } from ".."
 
 const barColors = {
     default: '#1962E5',
-    curr: '#B8D0FC',
+    current: '#B8D0FC',
     compare: '#EB3939',
     sorted: '#30E573',
+    compareBorderColor: '#EB3939'
+}
+
+function markCurrent(array, index){
+    setColors(array, [index], barColors.current)
+}
+
+function markComparing(array, indices) {
+    setBorderColor(array, indices, barColors.compareBorderColor)
+}
+
+function markSorted(array, indices) {
+    setColors(array, indices, barColors.sorted)
 }
 
 export const insertionSortSolver = async ( { array, updateArray } ) => {
-    let idx1 = 0;
-    let idx2 = array.length - 1;
     let newArray = array;
 
-    // color first and last red
-    newArray = setColors(newArray, [idx1, idx2], barColors.compare)
-    await updateArray(newArray);
-    
-    // swap first and last
-    newArray = swap(newArray, [idx1, idx2]);
+    // mark first element as sorted
+    markSorted(newArray, [0]);
     await updateArray(newArray);
 
-    // reset to default color
-    newArray = setColors(newArray, [idx1, idx2], barColors.default)
-    await updateArray(newArray);
+    // loop through rest of the list
+    for (let i = 1; i < array.length; i++) {
+        let currentValue = newArray[i].value;
+        let currentValueIndex = i;
 
+        // mark selected bar
+        markCurrent(newArray, i)
+        await updateArray(newArray);
+
+        // loop backwards through sorted section
+        for (let j = i - 1; j >= 0; j--) {
+            // compare current bar with each sorted bar, swap if out of order
+            markComparing(newArray, [currentValueIndex, j]);
+            await updateArray(newArray);
+
+            if (newArray[j].value > currentValue) {
+                swap(newArray, [j, currentValueIndex]);
+                markSorted(newArray, [currentValueIndex]);
+
+                if (j === 0) {
+                    await updateArray(newArray);
+                    markSorted(newArray, [j])
+                }
+
+                await updateArray(newArray);
+                
+                currentValueIndex = j;
+
+            } else {
+                markSorted(newArray, [j, currentValueIndex]);
+                await updateArray(newArray);
+                break;
+            }
+        }
+    }
 }
