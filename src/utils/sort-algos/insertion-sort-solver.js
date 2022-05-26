@@ -36,9 +36,8 @@ export const insertionSortSolver = async ( { array, updateArray } ) => {
         markCurrent(newArray, i)
         await updateArray(newArray);
 
-        // loop backwards through sorted section
+        // loop backwards through sorted section, compare current bar with each sorted bar, swap if out of order
         for (let j = i - 1; j >= 0; j--) {
-            // compare current bar with each sorted bar, swap if out of order
             markComparing(newArray, [currentValueIndex, j]);
             await updateArray(newArray);
 
@@ -52,7 +51,6 @@ export const insertionSortSolver = async ( { array, updateArray } ) => {
                 }
 
                 await updateArray(newArray);
-                
                 currentValueIndex = j;
 
             } else {

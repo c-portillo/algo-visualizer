@@ -4,14 +4,15 @@ import SortContainer from "../sort-container/sort-container";
 
 import './algo-page.styles.scss'
 
+
+// slider imports
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
 /*
-1. Generate array           x
-2. Render array             x 
-3. Design sorting func      x
-4. swap first and last      x
-5. change solve to sort     x
-6. change solver to sorter  x
-7. implement ins sort             
+1. Add slider UI                            
+2. connect slider with state values         
+3. allow slider to update state values         
 */
 
 class AlgoPage extends React.Component {
@@ -22,7 +23,7 @@ class AlgoPage extends React.Component {
             arrayValues: [],
             arrayLength: 12,
             defaultBarColor: '#1962E5',
-            delayValue: 450
+            delayValue: 50
         }
 
         this.generateArray = this.generateArray.bind(this);
@@ -47,6 +48,7 @@ class AlgoPage extends React.Component {
     sort() {
         this.props.solver({ array: this.state.arrayValues, updateArray: this.updateArray }); // solver will take 3 arguments: array, updateArray(), done()
     }
+    
 
     render() {
         return (
@@ -54,6 +56,18 @@ class AlgoPage extends React.Component {
                 <div style={{ textAlign: 'center' }}>
                     <h2> {this.props.algoName} </h2>
                     <SortContainer arrayValues={this.state.arrayValues} arrayLength={this.state.arrayLength} />
+                    <Box sx={{ width: 200 }} style={{margin: 'auto'}}>
+                        <Slider
+                            aria-label="Speed"
+                            defaultValue={30}
+                            // getAriaValueText={valuetext}
+                            // valueLabelDisplay="auto"
+                            step={1}
+                            marks
+                            min={1}
+                            max={4}
+                        />
+                    </Box>
                     <button onClick={this.sort}> Sort </button>
                     <button onClick={this.generateArray}> Reset </button>
                 </div>
