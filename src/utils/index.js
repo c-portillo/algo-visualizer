@@ -29,8 +29,11 @@ export const delay = (time) => {
 
 export const until = (conditionFunction) => {
     const poll = resolve => {
-        if (conditionFunction()) resolve();
-        else setTimeout(_ => poll(resolve), 400);
+        if (conditionFunction()) {
+            resolve();
+        } else {
+            setTimeout(_ => poll(resolve), 0);
+        }
     }
     return new Promise(poll);
 }
