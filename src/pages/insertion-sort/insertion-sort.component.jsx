@@ -1,3 +1,21 @@
+import React, { useEffect } from "react";
+import { InsertionSortSolver } from "../../utils";
+import AlgoPage from "../../components/algo-page/algo-page.component";
+
+function InsertionSort( {setPage} ) {
+    useEffect(() => {
+        setPage("insertion-sort");
+    }, [])
+    
+    return (
+        <AlgoPage algoName="Insertion Sort" solver={InsertionSortSolver} />
+    )
+}
+
+export default InsertionSort;
+
+
+/*
 import React, { Component, useState, useEffect } from "react";
 import SortContainer from "../../components/sort-container/sort-container";
 
@@ -124,3 +142,5 @@ class InsertionSort extends Component {
 }
 
 export default InsertionSort;
+
+*/

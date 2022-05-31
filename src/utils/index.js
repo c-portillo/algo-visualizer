@@ -1,15 +1,13 @@
-
 // generate a random array of elements representing a bars (each with values for height, color, and id)
 export const getRandomValues = (size, color) => {
-    const values = Array.from({ length: size }, () => Math.floor(Math.random() * 97 + 1));
+    // const values = Array.from({ length: size }, () => Math.floor(Math.random() * 97 + 1));
     const result = [];
 
-    for (var i = 0; i < values.length; i++) {
+    for (var i = 0; i < size; i++) {
         result.push({
-            value: values[i],
+            value: Math.floor(Math.random() * 97 + 1),
             color: color,
             id: i,
-            current: false,
             borderColor: color
         })
     }
@@ -30,13 +28,16 @@ export const delay = (time) => {
 
 export const until = (conditionFunction) => {
     const poll = resolve => {
-        if (conditionFunction()) resolve();
-        else setTimeout(_ => poll(resolve), 400);
+        if (conditionFunction()) {
+            resolve();
+        } else {
+            setTimeout(_ => poll(resolve), 0);
+        }
     }
     return new Promise(poll);
 }
 
-export const setColors = (array, indices, color, border = true) => {
+export const setColors = (array, indices, color, border=true) => {
     for (const idx of indices) {
         array[idx].color = color;
         if (border) array[idx].borderColor = color;
@@ -52,6 +53,9 @@ export const swap = (array, indices) => {
         array[indices[1]] = temp;
         return array
     } else {
-        throw new Error('in swap(array, indices), indices must be array of length 2');
+        throw new Error('in swap(array, indices), indices must be array of 2 integers');
     };
 }
+
+// sorting logic
+export {InsertionSortSolver}  from './sort-algos/insertion-sort-solver';

@@ -1,3 +1,17 @@
+import React from "react";
+
+function CompareAlgos() {
+    return (
+        <div style={{textAlign: 'center'}}>
+            <h1> Coming Soon </h1>
+        </div>
+    )
+}
+
+export default CompareAlgos;
+
+
+/*
 import React, { useState, useEffect, useRef } from "react";
 import OutlinedCard from "./compare-card/compare-card.component";
 import { styled } from '@mui/material/styles';
@@ -5,7 +19,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import InsertionSort from "../insertion-sort/insertion-sort.component";
-import { getRandomValues } from "../../utils/shared";
+import { getRandomValues } from "../../utils";
 import { cloneDeep, truncate } from "lodash";
 
 import "./compare.styles.scss"
@@ -60,7 +74,6 @@ const CompareAlgos = ({ setPage }) => {
                 <button onClick={playPause}> Toggle </button>
             </div>
 
-            {/* <h1 style={{ textAlign: "center" }}> Compare Algorithms </h1> */}
             <Box sx={{ width: '100%' }}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 0, sm: 1, md: 1 }}>
                     {getAlgos(algos, setPage, array, pause)}
@@ -71,3 +84,5 @@ const CompareAlgos = ({ setPage }) => {
 }
 
 export default CompareAlgos;
+
+*/
