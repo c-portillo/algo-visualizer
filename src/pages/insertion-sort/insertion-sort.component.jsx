@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { insertionSortSolver } from "../../utils";
+import { InsertionSortSolver } from "../../utils";
 import AlgoPage from "../../components/algo-page/algo-page.component";
 
 function InsertionSort( {setPage} ) {
@@ -8,7 +8,7 @@ function InsertionSort( {setPage} ) {
     }, [])
     
     return (
-        <AlgoPage algoName="Insertion Sort" solver={insertionSortSolver} />
+        <AlgoPage algoName="Insertion Sort" solver={InsertionSortSolver} />
     )
 }
 

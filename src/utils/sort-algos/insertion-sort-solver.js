@@ -20,22 +20,31 @@ function markSorted(array, indices) {
     setColors(array, indices, barColors.sorted)
 }
 
-export const insertionSortSolver = async ({ array, updateArray, done }) => {
-    let terminate = false;
-
-    function forceTerminate() {
-        terminate = true;
+export class InsertionSortSolver {
+    constructor({array, updateArray, done}) {
+        this.array = array;
+        this.updateArray = updateArray;
+        this.done = done;
+        this.forceTerminate = false;
     }
-    async function sort() {
-        let newArray = array;
+
+    terminate() {
+        this.forceTerminate = true;
+        console.log('terminating')
+    }
+
+    async sort() {
+        let newArray = this.array;
+        let updateArray = this.updateArray;
 
         // mark first element as sorted
         markSorted(newArray, [0]);
         await updateArray(newArray);
 
         // loop through rest of the list
-        for (let i = 1; i < array.length; i++) {
-            if (terminate) return;
+        for (let i = 1; i < newArray.length; i++) {
+            if (this.forceTerminate) return;
+
             let currentValue = newArray[i].value;
             let currentValueIndex = i;
 
@@ -45,7 +54,7 @@ export const insertionSortSolver = async ({ array, updateArray, done }) => {
 
             // loop backwards through sorted section, compare current bar with each sorted bar, swap if out of order
             for (let j = i - 1; j >= 0; j--) {
-                if (terminate) return;
+                if (this.forceTerminate) return;
                 markComparing(newArray, [currentValueIndex, j]);
                 await updateArray(newArray);
 
@@ -68,10 +77,63 @@ export const insertionSortSolver = async ({ array, updateArray, done }) => {
                 }
             }
         }
-
-        done();
+        if (!this.forceTerminate) this.done();
     }
 
-    sort();
-
 }
+
+// export const insertionSortSolver = async ({ array, updateArray, done }) => {
+//     let terminate = false;
+
+//     function forceTerminate() {
+//         terminate = true;
+//     }
+//     async function sort() {
+//         let newArray = array;
+
+//         // mark first element as sorted
+//         markSorted(newArray, [0]);
+//         await updateArray(newArray);
+
+//         // loop through rest of the list
+//         for (let i = 1; i < array.length; i++) {
+//             if (terminate) return;
+//             let currentValue = newArray[i].value;
+//             let currentValueIndex = i;
+
+//             // mark selected bar
+//             markCurrent(newArray, i)
+//             await updateArray(newArray);
+
+//             // loop backwards through sorted section, compare current bar with each sorted bar, swap if out of order
+//             for (let j = i - 1; j >= 0; j--) {
+//                 if (terminate) return;
+//                 markComparing(newArray, [currentValueIndex, j]);
+//                 await updateArray(newArray);
+
+//                 if (newArray[j].value > currentValue) {
+//                     swap(newArray, [j, currentValueIndex]);
+//                     markSorted(newArray, [currentValueIndex]);
+
+//                     if (j === 0) {
+//                         await updateArray(newArray);
+//                         markSorted(newArray, [j])
+//                     }
+
+//                     await updateArray(newArray);
+//                     currentValueIndex = j;
+
+//                 } else {
+//                     markSorted(newArray, [j, currentValueIndex]);
+//                     await updateArray(newArray);
+//                     break;
+//                 }
+//             }
+//         }
+
+//         done();
+//     }
+
+//     sort();
+
+// }

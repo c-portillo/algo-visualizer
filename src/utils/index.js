@@ -1,14 +1,13 @@
 // generate a random array of elements representing a bars (each with values for height, color, and id)
 export const getRandomValues = (size, color) => {
-    const values = Array.from({ length: size }, () => Math.floor(Math.random() * 97 + 1));
+    // const values = Array.from({ length: size }, () => Math.floor(Math.random() * 97 + 1));
     const result = [];
 
-    for (var i = 0; i < values.length; i++) {
+    for (var i = 0; i < size; i++) {
         result.push({
-            value: values[i],
+            value: Math.floor(Math.random() * 97 + 1),
             color: color,
             id: i,
-            current: false,
             borderColor: color
         })
     }
@@ -59,4 +58,4 @@ export const swap = (array, indices) => {
 }
 
 // sorting logic
-export { insertionSortSolver } from './sort-algos/insertion-sort-solver';
+export {InsertionSortSolver}  from './sort-algos/insertion-sort-solver';

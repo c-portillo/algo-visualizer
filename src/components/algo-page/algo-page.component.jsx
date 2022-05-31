@@ -10,7 +10,8 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Stack } from "@mui/material";
 
-const speedLabels = ['Slow', 'Medium', 'Fast', 'Maximum Effort']
+const speedLabels = ['Slow', 'Medium', 'Fast', 'Maximum Effort'];
+const speedValues = [500, 100, 50, 0];
 
 /*
 1. Add slider UI                            
@@ -24,17 +25,20 @@ class AlgoPage extends React.Component {
 
         this.state = {
             arrayValues: [],
-            arrayLength: 12,
+            arrayLength: 80,
             defaultBarColor: '#1962E5',
-            delayValue: 30,
+            delayValue: 0,
             pause: false,
             isSorting: false,
-            isComplete: false
+            isComplete: false,
+            sorter: null,
+            speed: 1
         }
 
         this.generateArray = this.generateArray.bind(this);
         this.sortComplete = this.sortComplete.bind(this);
         this.updateArray = this.updateArray.bind(this);
+        this.setSpeed = this.setSpeed.bind(this);
         this.sort = this.sort.bind(this);
     }
 
@@ -49,8 +53,10 @@ class AlgoPage extends React.Component {
     }
 
     async generateArray() {
+        if (this.state.sorter) this.state.sorter.terminate();
         const newArray = getRandomValues(this.state.arrayLength, this.state.defaultBarColor);
-        await this.setState({ arrayValues: newArray, isSorting: false, isComplete: false, pause: true });
+        const sorter = new this.props.solver({ array: newArray, updateArray: this.updateArray, done: this.sortComplete })
+        await this.setState({ arrayValues: newArray, isSorting: false, isComplete: false, pause: true, sorter: sorter });
     }
 
     async sortComplete() {
@@ -62,11 +68,14 @@ class AlgoPage extends React.Component {
             this.setState({ pause: !this.state.pause });
         } else {
             if (!this.state.isComplete) {
-                this.props.solver({ array: this.state.arrayValues, updateArray: this.updateArray, done: this.sortComplete }); // solver will take 3 arguments: array, updateArray(), done()
+                this.state.sorter.sort()
                 await this.setState({ isSorting: true, pause: false });
             }
-            console.log('sorting!')
         }
+    }
+
+    setSpeed(event) {
+        console.log(event.target.value);
     }
 
 
@@ -80,8 +89,9 @@ class AlgoPage extends React.Component {
                         <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                             <div> Speed </div>
                             <Slider
+                                onChange={this.setSpeed}
                                 aria-label="Speed"
-                                defaultValue={1}
+                                defaultValue={this.state.speed}
                                 step={1}
                                 marks
                                 valueLabelDisplay="auto"
