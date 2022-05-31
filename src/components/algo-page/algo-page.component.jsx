@@ -11,7 +11,7 @@ import Slider from '@mui/material/Slider';
 import { Stack } from "@mui/material";
 
 const speedLabels = ['Slow', 'Medium', 'Fast', 'Maximum Effort'];
-const speedValues = [500, 100, 50, 0];
+const speedValues = [500, 200, 50, 0];
 
 /*
 1. Add slider UI                            
@@ -25,9 +25,9 @@ class AlgoPage extends React.Component {
 
         this.state = {
             arrayValues: [],
-            arrayLength: 80,
+            arrayLength: 40,
             defaultBarColor: '#1962E5',
-            delayValue: 0,
+            delayValue: 100,
             pause: false,
             isSorting: false,
             isComplete: false,
@@ -75,7 +75,8 @@ class AlgoPage extends React.Component {
     }
 
     setSpeed(event) {
-        console.log(event.target.value);
+        let newSpeed = event.target.value;
+        this.setState({ speed: newSpeed, delayValue: speedValues[newSpeed]})
     }
 
 
@@ -85,13 +86,13 @@ class AlgoPage extends React.Component {
                 <div style={{ textAlign: 'center' }}>
                     <h2> {this.props.algoName} </h2>
                     <SortContainer arrayValues={this.state.arrayValues} arrayLength={this.state.arrayLength} />
-                    <Box sx={{ width: 200 }} style={{ margin: 'auto' }}>
+                    <Box sx={{ width: 200 }} style={{ margin: '0 auto' }}>
                         <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                             <div> Speed </div>
                             <Slider
                                 onChange={this.setSpeed}
                                 aria-label="Speed"
-                                defaultValue={this.state.speed}
+                                defaultValue={1}
                                 step={1}
                                 marks
                                 valueLabelDisplay="auto"
