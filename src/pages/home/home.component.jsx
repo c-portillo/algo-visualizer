@@ -12,8 +12,6 @@ const Home = ({ setPage }) => {
         <div style={{ textAlign: 'center' }}>
             <h1> Hello, World!</h1>
             <p />
-            <p> I created this project to help me visualize and better understand sorting algorithms. </p>
-            <p> I hope it helps you too. Feel free to check out the project's github repo. </p>
             <p> Pick an algorithm below or from the top right. </p>
             <div style={{textAlign: 'left', display: 'inline-block' , margin: 'auto'}}>
                 <ul>

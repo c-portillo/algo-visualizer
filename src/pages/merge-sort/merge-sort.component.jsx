@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import AlgoPage from "../../components/algo-page/algo-page.component";
+import { MergeSortSolver } from "../../utils";
 
 import "./merge-sort.styles.scss"
  
@@ -8,9 +10,7 @@ const MergeSort = ({ setPage }) => {
     }, []);
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1> Merge Sort Page </h1>
-        </div>
+        <AlgoPage algoName="Merge Sort" solver={MergeSortSolver} />
     )
 }
 
