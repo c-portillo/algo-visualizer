@@ -42,6 +42,7 @@ export class BubbleSortSolver {
         let updateArray = this.updateArray;
 
         for (let i = 0; i < newArray.length; i++) {
+            if (this.forceTerminate) return;
             // mark first element as max for this iteration
             let indexOfMax = 0;
             (i < this.array.length - 1) ? markCurrent(newArray, [0]) : markSorted(newArray, [0])
@@ -49,6 +50,7 @@ export class BubbleSortSolver {
             await updateArray(newArray);
             
             for (let j = 1; j < newArray.length - i; j++) {
+                if (this.forceTerminate) return;
                 // mark as comparing
                 markComparing(newArray, [indexOfMax, j])
                 await updateArray(newArray);

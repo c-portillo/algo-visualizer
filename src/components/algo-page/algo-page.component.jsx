@@ -15,12 +15,6 @@ import Button from '@mui/material/Button';
 const speedLabels = ['Slow', 'Medium', 'Fast', 'Maximum Effort'];
 const speedValues = [500, 200, 50, 0];
 
-/*
-1. Add slider UI                            
-2. connect slider with state values         
-3. allow slider to update state values         
-*/
-
 class AlgoPage extends React.Component {
     constructor(props) {
         super(props);

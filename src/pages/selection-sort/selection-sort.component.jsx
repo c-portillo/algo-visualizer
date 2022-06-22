@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { SelectionSortSolver } from "../../utils";
+import AlgoPage from "../../components/algo-page/algo-page.component";
 
 import './selection-sort.styles.scss'
 
@@ -8,9 +10,7 @@ const SelectionSort = ({ setPage }) => {
     }, [])
 
     return (
-        <div style={{ textAlign: 'center' }}>
-            <h1> Selection Sort Page </h1>
-        </div>
+        <AlgoPage algoName="Selection Sort" solver={SelectionSortSolver} />
     )
 }
 

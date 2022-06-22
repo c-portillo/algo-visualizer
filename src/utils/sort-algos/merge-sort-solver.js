@@ -1,29 +1,11 @@
 import { until, setColors, swap, setBorderColor } from ".."
 
-/*
-Sort
-- MargeSort()
-
-
-MergeSort(start=0, end=array.length)
-- If length of array == 1: do nothing
-
-- Halve input array
-
-- Run Merge Sort on each half
-    - Figure out mid point: Math.floor(array.length / 2)
-    - left = MergeSort(start = start, end = end)
-
-- Merge sorted halves
-
-
-*/
-
 const barColors = {
     default: '#1962E5',
     current: '#B8D0FC',
     compare: '#EB3939',
     sorted: '#30E573',
+    semiSorted: 'RGBA(46,229,114,0.4)',
     compareBorderColor: '#EB3939'
 }
 
@@ -35,8 +17,9 @@ function markComparing(array, indices) {
     setBorderColor(array, indices, barColors.compareBorderColor)
 }
 
-function markSorted(array, indices) {
-    setColors(array, indices, barColors.sorted)
+function markSorted(array, indices, finalSort=true) {
+    const sortedColor = finalSort ? barColors.sorted : barColors.semiSorted;
+    setColors(array, indices, sortedColor)
 }
 
 export class MergeSortSolver {
@@ -53,9 +36,9 @@ export class MergeSortSolver {
         // console.log('terminating')
     }
 
-    mergeSort(array=this.array, startIndex = 0, endIndex = this.arrayLength - 1) {
+    mergeSort(array=this.array, startIndex = 0, endIndex = this.arrayLength - 1, firstCall=true) {
         return new Promise(async (resolve, reject) => {
-            if (startIndex === endIndex) {
+            if (startIndex === endIndex || this.forceTerminate) {
                 resolve();
                 return;
             }
@@ -69,11 +52,15 @@ export class MergeSortSolver {
             let [rightStart, rightEnd] = [mid + 1, endIndex];
 
             // run merge sort on both halves
-            await this.mergeSort(newArray, leftStart, leftEnd);
-            await this.mergeSort(newArray, rightStart, rightEnd);
+            await this.mergeSort(newArray, leftStart, leftEnd, false);
+            await this.mergeSort(newArray, rightStart, rightEnd, false);
 
             // merge sorted halves
             while (leftStart <= leftEnd && rightStart <= rightEnd) {
+                if (this.forceTerminate) {
+                    resolve();
+                    return;
+                }
                 markCurrent(newArray, [leftStart, rightStart])
                 markComparing(newArray, [leftStart, rightStart])
                 await updateArray(newArray);
@@ -83,6 +70,7 @@ export class MergeSortSolver {
                 if (leftVal <= rightVal) {
                     // markSorted(newArray, [leftStart]);
                     markCurrent(newArray, [leftStart, rightStart])
+                    markSorted(newArray, [leftStart], firstCall)
                     await updateArray(newArray);
 
                     leftStart++;
@@ -93,6 +81,7 @@ export class MergeSortSolver {
                     }
                     newArray[leftStart] = rightElement;
                     markCurrent(newArray, [leftStart, leftStart+1])
+                    markSorted(newArray, [leftStart], firstCall)
                     await updateArray(newArray);
 
                     leftStart++;
@@ -100,6 +89,13 @@ export class MergeSortSolver {
                     rightStart++
                 }
             }
+            let rest = []
+            for (let i = Math.min(leftStart, rightStart); i <= endIndex; i++) {
+                rest.push(i)
+            }
+
+            markSorted(newArray, rest, firstCall)
+            await updateArray(newArray);
 
             resolve();
         })

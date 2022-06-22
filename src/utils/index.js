@@ -58,5 +58,6 @@ export const swap = (array, indices) => {
 
 // sorting logic
 export { InsertionSortSolver }  from './sort-algos/insertion-sort-solver';
+export { SelectionSortSolver } from './sort-algos/selection-sort-solver';
 export { BubbleSortSolver }  from './sort-algos/bubble-sort-solver';
 export { MergeSortSolver }  from './sort-algos/merge-sort-solver';
