@@ -66,7 +66,7 @@ export class SelectionSortSolver {
 
                     [currentMinValue, currentMinIndex] = [currentValue, j]
                 } else {
-                    markDefault(newArray, j)
+                    if (j !== i) markDefault(newArray, j);
                 }
 
                 if (j === newArray.length - 1) {
