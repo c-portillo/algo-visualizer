@@ -42,29 +42,17 @@ export class SelectionSortSolver {
         console.log('terminating')
     }
 
-    /*
-    x Make current (i) lightblue 
-    x Wait for time interval
-    x Mark as current min (orange)
-    x iterate through rest of items
-        - if current item is less than current min, update current min
-        - if current item is last item, swap current min with item at i
-
-    */
     async sort() {
         let newArray = this.array;
         let updateArray = this.updateArray;
 
-        // loop through rest of the list
         for (let i = 0; i < newArray.length; i++) {
             if (this.forceTerminate) return;
             
             let [currentMinValue, currentMinIndex] = [newArray[i].value, i];
-
             markMin(newArray, currentMinIndex);
             await updateArray(newArray);
 
-            // loop through rest
             for (let j = i; j < newArray.length; j++) {
                 let currentValue = newArray[j].value;
 
