@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-
+import { BubbleSortSolver } from "../../utils";
+import AlgoPage from "../../components/algo-page/algo-page.component";
 import "./bubble-sort.styles.scss";
 
-const BubbleSort = ({ setPage }) => {
+function BubbleSort({setPage}) {
     useEffect(() => {
         setPage('bubble-sort')
     },[])
     
     return (
         <div style={{ textAlign: 'center' }}>
-            <h1> Bubble Sort Page </h1>
+            <AlgoPage algoName="Bubble Sort" solver={BubbleSortSolver} />
         </div>)
 }
 

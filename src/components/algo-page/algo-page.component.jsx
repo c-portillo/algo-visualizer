@@ -1,6 +1,7 @@
 import React from "react";
 import { getRandomValues, delay, until } from "../../utils";
 import SortContainer from "../sort-container/sort-container";
+import { cloneDeep } from "lodash";
 
 import './algo-page.styles.scss'
 
@@ -9,15 +10,10 @@ import './algo-page.styles.scss'
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Stack } from "@mui/material";
+import Button from '@mui/material/Button';
 
 const speedLabels = ['Slow', 'Medium', 'Fast', 'Maximum Effort'];
 const speedValues = [500, 200, 50, 0];
-
-/*
-1. Add slider UI                            
-2. connect slider with state values         
-3. allow slider to update state values         
-*/
 
 class AlgoPage extends React.Component {
     constructor(props) {
@@ -25,26 +21,32 @@ class AlgoPage extends React.Component {
 
         this.state = {
             arrayValues: [],
-            arrayLength: 40,
+            arrayLength: 20,
             defaultBarColor: '#1962E5',
             delayValue: 100,
             pause: false,
             isSorting: false,
             isComplete: false,
             sorter: null,
-            speed: 1
         }
 
         this.generateArray = this.generateArray.bind(this);
         this.sortComplete = this.sortComplete.bind(this);
         this.updateArray = this.updateArray.bind(this);
         this.setSpeed = this.setSpeed.bind(this);
+        this.setSize = this.setSize.bind(this);
         this.sort = this.sort.bind(this);
     }
 
     async updateArray(newArray) {
-        await until(_ => this.state.pause == false);
-        await this.setState(newArray);
+        // wait until not paused or array is reset
+        await until(_ => (!this.state.pause) || !this.state.isSorting);
+
+        // if array has been reset do nothing
+        if (this.state.isSorting === false) return;
+
+        await this.setState({arrayValues: cloneDeep(newArray)});
+
         await delay(this.state.delayValue);
     }
 
@@ -74,9 +76,16 @@ class AlgoPage extends React.Component {
         }
     }
 
-    setSpeed(event) {
-        let newSpeed = event.target.value;
-        this.setState({ speed: newSpeed, delayValue: speedValues[newSpeed]})
+    async setSpeed(event) {
+        const newSpeed = event.target.value;
+        this.setState({ speed: newSpeed, delayValue: speedValues[newSpeed] });
+    }
+
+    async setSize(event) {
+        if (event.target.value !== this.state.arrayLength) {
+            await this.setState({ arrayLength: event.target.value })
+            this.generateArray()
+        }
     }
 
 
@@ -88,7 +97,7 @@ class AlgoPage extends React.Component {
                     <SortContainer arrayValues={this.state.arrayValues} arrayLength={this.state.arrayLength} />
                     <Box sx={{ width: 200 }} style={{ margin: '0 auto' }}>
                         <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-                            <div> Speed </div>
+                            <div style={{ width: '80px' }}> Speed </div>
                             <Slider
                                 onChange={this.setSpeed}
                                 aria-label="Speed"
@@ -101,9 +110,24 @@ class AlgoPage extends React.Component {
                                 max={3}
                             />
                         </Stack>
+                        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                            <div style={{ width: '80px' }}> Size </div>
+                            <Slider
+                                onChange={this.setSize}
+                                disabled={this.state.isSorting}
+                                aria-label="Size"
+                                defaultValue={20}
+                                step={5}
+                                marks
+                                valueLabelDisplay="off"
+                                valueLabelFormat={value => <div>{speedLabels[value]}</div>}
+                                min={5}
+                                max={50}
+                            />
+                        </Stack>
                     </Box>
-                    <button onClick={this.sort}> {this.state.isSorting ? (this.state.pause ? 'Resume': 'Pause') : 'Sort' } </button>
-                    <button onClick={this.generateArray}> Reset </button>
+                    <Button className="control-button" variant="contained" onClick={this.sort}> {this.state.isSorting ? (this.state.pause ? 'Resume' : 'Pause') : 'Sort'} </Button>
+                    <Button className="control-button" variant="contained" onClick={this.generateArray}> Reset </Button>
                 </div>
             </div>
         )

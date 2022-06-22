@@ -35,7 +35,7 @@ function AlgoSelect({ currentPage }) {
                 <MenuItem className="menu-item" value={'bubble-sort'}> <Link className="menu-algo" to="/bubble-sort"> Bubble Sort </Link> </MenuItem>
                 <MenuItem className="menu-item" value={'insertion-sort'}> <Link className="menu-algo" to="/insertion-sort"> Insertion Sort </Link> </MenuItem>
                 <MenuItem className="menu-item" value={'selection-sort'}> <Link className="menu-algo" to="/selection-sort"> Selection Sort </Link> </MenuItem>
-                <MenuItem className="menu-item" value={'compare'}> <Link className="menu-algo" to="/compare"> Compare Algos </Link> </MenuItem>
+                {/* <MenuItem className="menu-item" value={'compare'}> <Link className="menu-algo" to="/compare"> Compare Algos </Link> </MenuItem> */}
             </Select>
         </FormControl>
     );
